@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>New Project</title>
+</h:head>
+
+<h:body>
+
+    <h:form id="form">
+        <h:panelGrid columns="1" id="panel">
+            <p:message for="title"/>
+            <p:inputText id="title" size="30" value="#{kanbanBoardView.project.title}" required="true"/>
+            <p:commandButton value="Save" action="#{kanbanBoardView.saveProject}" update="panel"/>
+        </h:panelGrid>
+    </h:form>
+
+</h:body>
+
+</html>

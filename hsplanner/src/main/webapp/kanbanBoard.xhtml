@@ -1,0 +1,229 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>
+        <h:outputText value="#{kanbanBoardView.title}" />
+    </title>
+    <link rel="stylesheet" href="resources/css/bootstrap/bootstrap.min.css" />
+    <link href="resources/css/site.css" rel="stylesheet" />
+</h:head>
+
+<h:body>
+    <style type="text/css">
+        .ui-panel,
+        div.ui-state-hover {
+            margin: 10px;
+            width: 300px;
+        }
+
+        .ui-dashboard-column {
+            width: 320px;
+        }
+    </style>
+
+    <app>
+
+        <div class="sidebar">
+            <div class="top-row pl-4 navbar navbar-dark">
+                <a class="navbar-brand" href="">HSplanner</a>
+                <button class="navbar-toggler">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+
+            <div>
+                <h:form id="frmProjects">
+                    <!-- Notifications -->
+                    <p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true" />
+                    <ul class="nav flex-column">
+                        <li class="nav-item px-3">
+                            <a class="nav-link" href="">
+                                <span class="oi oi-home" aria-hidden="true"></span> Home
+                            </a>
+                        </li>
+                        <p:repeat value="#{kanbanBoardView.listProjects}" var="project" id="lstProjects">
+                            <li class="nav-item px-3">
+                                <a class="nav-link" href="counter">
+                                    <span class="oi oi-list-rich" aria-hidden="true"></span> <h:outputText value="#{project.title}"/>
+                                </a>
+                            </li>
+                        </p:repeat>
+                        <li class="nav-item px-3">
+                            <p:commandLink action="#{kanbanBoardView.newProject}" styleClass="nav-link">
+                                <p:ajax event="dialogReturn" listener="#{kanbanBoardView.onSavingProject}"
+                                    update="msgs, frmProjects" />
+                                <span class="oi oi-plus" aria-hidden="true"></span> New Project...
+                            </p:commandLink>
+                        </li>
+                    </ul>
+                </h:form>
+            </div>
+        </div>
+
+        <div class="main">
+            <h:form>
+
+            <!-- Notifications -->
+            <p:growl id="growl" showDetail="true" skipDetailIfEqualsSummary="true" />
+                <!-- Menu bar -->
+                <p:menubar>
+                    <p:menuitem value="New Task" icon="pi pi-fw pi-plus" action="#{dashboardController.newTask}" />
+
+                    <f:facet name="options">
+                        <h:outputText value="Welcome logged user." />
+
+                        <div class="ui-input-icon-left p-mr-2">
+                            <i class="pi pi-fw pi-search" />
+                            <p:inputText placeholder="Search" />
+                        </div>
+
+                        <p:button value="Logout" icon="pi pi-fw pi-sign-out" styleClass="ui-button-info" />
+                    </f:facet>
+                </p:menubar>
+
+
+                <div class="content px-4">
+                    <!-- Dashboard -->
+                    <p:dashboard id="board" model="#{dashboardController.model}">
+                        <p:ajax event="reorder" listener="#{dashboardController.handleReorder}" update="growl" />
+
+                        <p:panel id="sports" header="Sports" toggleable="true" toggleSpeed="500">
+                            <div>
+                                <p:tag styleClass="p-mr-2" value="Primary"></p:tag>
+                            </div>
+                            <div>
+                                <p:commandLink value="Sports Content" action="#{dashboardController.viewProducts}"
+                                    styleClass="p-mr-2">
+                                    <f:setPropertyActionListener target="#{dashboardController.mensagemBemVindo}"
+                                        value="Olá mundo :)" />
+                                </p:commandLink>
+                            </div>
+                        </p:panel>
+
+                        <p:panel id="finance" header="Finance" toggleable="true" toggleSpeed="500" widgetVar="panel">
+                            <div>
+                                <p:tag styleClass="bg-primary">
+                                    Primary
+                                </p:tag>
+                            </div>
+                            <div>
+                                <p:commandLink value="Finance Content" action="#{dashboardController.viewProducts}"
+                                    styleClass="p-mr-2" />
+                            </div>
+                            <h:panelGrid columns="3" cellspacing="15" cellpadding="15">
+                                <p:badge value="2">
+                                    <i class="pi pi-bell" style="font-size: 2rem" />
+                                </p:badge>
+                                <p:badge value="10+" severity="danger">
+                                    <i class="pi pi-calendar p-ml-4" style="font-size: 2rem" />
+                                </p:badge>
+
+                                <p:badge severity="danger">
+                                    <i class="pi pi-envelope p-ml-4" style="font-size: 2rem" />
+                                </p:badge>
+                            </h:panelGrid>
+
+                            <f:facet name="options">
+                                <p:menu>
+                                    <p:submenu label="Settings">
+                                        <p:menuitem value="Toggle" url="#" icon="pi pi-clone"
+                                            onclick="PF('panel').toggle()" />
+                                        <p:menuitem value="Remove" url="#" icon="pi pi-times"
+                                            onclick="PF('panel').close()" />
+                                    </p:submenu>
+                                </p:menu>
+                            </f:facet>
+                            <f:facet name="actions">
+                                <p:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default">
+                                    <h:outputText styleClass="ui-icon pi pi-question" />
+                                </p:commandLink>
+                                <p:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default">
+                                    <h:outputText styleClass="ui-icon pi pi-star" />
+                                </p:commandLink>
+                            </f:facet>
+                        </p:panel>
+
+                        <p:panel id="lifestyle" header="Lifestyle" toggleable="true" toggleSpeed="500">
+                            <div>
+                                <p:tag styleClass="bg-success">
+                                    Success
+                                </p:tag>
+                            </div>
+                            <div>
+                                <p:commandLink value="Lifestyle Content" action="#{dashboardController.viewProducts}"
+                                    styleClass="p-mr-2" />
+                            </div>
+                        </p:panel>
+
+                        <p:panel id="weather" header="Weather" toggleable="true" toggleSpeed="500">
+                            <div>
+                                <p:tag styleClass="bg-info">
+                                    Info
+                                </p:tag>
+                            </div>
+                            <div>
+                                <p:commandLink value="Weather Content" action="#{dashboardController.viewProducts}"
+                                    styleClass="p-mr-2" />
+                            </div>
+                        </p:panel>
+
+                        <p:panel id="politics" header="Politics" toggleable="true" toggleSpeed="500">
+                            <div>
+                                <p:tag styleClass="bg-warning">
+                                    Warning
+                                </p:tag>
+                            </div>
+                            <div>
+                                <p:commandLink value="Politics Content" action="#{dashboardController.viewProducts}"
+                                    styleClass="p-mr-2" />
+                            </div>
+                        </p:panel>
+
+                        <p:panel id="tech" header="Technology" toggleable="true" toggleSpeed="500">
+                            <div>
+                                <p:tag styleClass="bg-danger">
+                                    Danger
+                                </p:tag>
+                            </div>
+                            <div>
+                                <p:commandLink value="Technology Content" action="#{dashboardController.viewProducts}"
+                                    styleClass="p-mr-2" />
+                            </div>
+                        </p:panel>
+
+                        <p:panel id="health" header="Health" toggleable="true" toggleSpeed="500">
+                            <div>
+                                <p:tag styleClass="bg-secondary">
+                                    Secondary
+                                </p:tag>
+                            </div>
+                            <div>
+                                <p:commandLink value="Health Content" action="#{dashboardController.viewProducts}"
+                                    styleClass="p-mr-2" />
+                            </div>
+                        </p:panel>
+
+                        <p:panel id="fashion" header="Fashion" toggleable="true" toggleSpeed="500">
+                            <div>
+                                <p:tag styleClass="bg-dark">
+                                    Dark
+                                </p:tag>
+                            </div>
+                            <div>
+                                <p:commandLink value="Fashion Content" action="#{dashboardController.viewProducts}"
+                                    styleClass="p-mr-2" />
+                            </div>
+                        </p:panel>
+                    </p:dashboard>
+                </div>
+            </h:form>
+        </div>
+    </app>
+
+</h:body>
+
+</html>
