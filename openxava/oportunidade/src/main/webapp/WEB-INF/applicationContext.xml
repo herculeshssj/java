@@ -24,7 +24,7 @@
  
     <!-- Configure parameters -->
     <task:scheduled-tasks scheduler="oportunidadeScheduler">
-        <task:scheduled ref="buscarOportunidadesTask" method="buscarOportunidades" fixed-delay="100000" initial-delay="100000"/>
+        <task:scheduled ref="buscarOportunidadesTask" method="buscarOportunidades" fixed-delay="900000" initial-delay="900000"/>
     </task:scheduled-tasks>
  
 </beans>
