@@ -23,6 +23,8 @@
     	<class>com.openxava.naviox.model.User</class>
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="update"/>
+            <property name="javax.persistence.create-database-schemas" value="true"/> 
+            <property name="hibernate.default_schema" value="dbo"/>
         </properties>
     </persistence-unit>
                     
