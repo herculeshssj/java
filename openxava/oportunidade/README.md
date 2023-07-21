@@ -3,7 +3,7 @@ Servidores - Oportunidades
 
 Busca de oportunidades de vagas para servidores públicos.
 
-Desenvolvido com a plataforma RAD OpenXava 6.5.2.
+Desenvolvido com a plataforma RAD OpenXava 7.1.
 
 ### Criação do container PostgreSQL
 
@@ -41,7 +41,7 @@ docker build -t oportunidade:latest .
 Após a construção da imagem, realize a criação do container:
 
 ```
-docker run --restart=unless-stopped --name oportunidade --link oportunidade-db -p 8080:8080 -d oportunidade:latest
+docker run --add-host=oportunidade-db:192.168.1.20 --name oportunidade -p 8080:8080 -d oportunidade:latest
 ```
 
 O sistema está acessível em http://<ip>:8080/oportunidade/
