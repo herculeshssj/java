@@ -1,6 +1,7 @@
 package net.mightysolutions.herculeshssj.oportunidade.repository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.NoResultException;
@@ -50,7 +51,7 @@ public class ConcursoRepository {
         XPersistence.commit();
     }
 
-    public List<Concurso> buscarNaoArquivadosPorData(LocalDate dataCorte) {
+    public List<Concurso> buscarNaoArquivadosPorData(LocalDateTime dataCorte) {
         return XPersistence.getManager()
             .createQuery("SELECT c FROM Concurso c WHERE c.dataCadastro <= :dataCorte AND c.arquivado = false", Concurso.class)
             .setParameter("dataCorte", dataCorte)

@@ -42,7 +42,8 @@ public class Concurso extends Identifiable {
 
     @Column(name="data_cadastro")
     @ReadOnly
-    LocalDate dataCadastro;
+    @Stereotype("DATETIME")
+    LocalDateTime dataCadastro;
 
     @Column(columnDefinition = "text")
     @ReadOnly

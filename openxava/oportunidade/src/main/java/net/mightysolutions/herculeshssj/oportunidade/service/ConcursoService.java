@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -47,7 +48,7 @@ public class ConcursoService {
                     .vagasCargosSalarios(content.select(".cd").text())
                     .periodoInscricao(content.select(".ce").text())
                     .arquivado(false)
-                    .dataCadastro(LocalDate.now())
+                    .dataCadastro(LocalDateTime.now())
                     .build();
 
                 // Trata os campos nulos
@@ -72,7 +73,7 @@ public class ConcursoService {
         Arquiva os concursos antigos que foram cadastrados a mais de 30 dias.
     */
     public void arquivarAntigos() {
-        LocalDate hoje = LocalDate.now();
+        LocalDateTime hoje = LocalDateTime.now();
         
         List<Concurso> listaConcursos = concursoRepository.buscarNaoArquivadosPorData(hoje.minusDays(30));
 
