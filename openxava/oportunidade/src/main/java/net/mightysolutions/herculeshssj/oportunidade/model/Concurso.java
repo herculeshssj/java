@@ -18,16 +18,16 @@ import lombok.*;
 @Tab(properties = "titulo, descricao, uf, arquivado")
 public class Concurso extends Identifiable {
     
-    @Column(columnDefinition = "text", nullable = false)
+    @Column(nullable = false)
     @ReadOnly
     String titulo;
 
-    @Column(columnDefinition = "text", nullable = false)
+    @Column(nullable = false)
     @ReadOnly
     @Stereotype("MEMO")
     String descricao;
 
-    @Column(columnDefinition = "text", nullable = false)
+    @Column(nullable = false)
     @ReadOnly
     @Stereotype("WEBURL")
     String link;
@@ -41,11 +41,10 @@ public class Concurso extends Identifiable {
     String hash;
 
     @Column(name="data_cadastro")
-    @ReadOnly
     @Stereotype("DATETIME")
     LocalDateTime dataCadastro;
 
-    @Column(columnDefinition = "text")
+    @Column
     @ReadOnly
     String cargos;
 
@@ -53,7 +52,7 @@ public class Concurso extends Identifiable {
     @ReadOnly
     Double salario;
 
-    @Column(name="nivel_escolaridade", columnDefinition = "text")
+    @Column(name="nivel_escolaridade")
     @ReadOnly
     String nivelEscolaridade;
 
@@ -61,7 +60,7 @@ public class Concurso extends Identifiable {
     @ReadOnly
     Integer vagas;
 
-    @Column(name="vagas_cargos_salarios", columnDefinition = "text")
+    @Column(name="vagas_cargos_salarios")
     @ReadOnly
     String vagasCargosSalarios;
 
