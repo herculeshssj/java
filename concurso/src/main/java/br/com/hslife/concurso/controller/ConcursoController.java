@@ -17,7 +17,6 @@ import br.com.hslife.concurso.entity.Concurso;
 import br.com.hslife.concurso.repository.ConcursoRepository;
 
 @RestController
-@RequestMapping("/concurso")
 public class ConcursoController {
 
     /*
@@ -28,7 +27,7 @@ public class ConcursoController {
     @Autowired
     ConcursoRepository concursoRepository;
 
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<Concurso>> buscarTodosConcursos() {
         try {
             List<Concurso> concursos = new ArrayList<Concurso>();
