@@ -19,7 +19,7 @@ public class BuscarConcursosTask {
 
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
     
-    @Scheduled(fixedDelay = 100000, initialDelay = 100000)
+    @Scheduled(fixedDelay = 900000, initialDelay = 900000)
     public void buscarOportunidades() {
         System.out.println("Iniciando a busca pelas oportunidades... :: Hora local - " + dateTimeFormatter.format(LocalDateTime.now()));
 
