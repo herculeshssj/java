@@ -25,14 +25,14 @@ public class BuscarConcursosTask {
 
         // Atualiza o cadastro de concursos
         List<String> linkConcursos = new ArrayList<>();
-        //linkConcursos.add("https://www.pciconcursos.com.br/concursos/");
+        linkConcursos.add("https://www.pciconcursos.com.br/concursos/");
         linkConcursos.add("https://www.pciconcursos.com.br/concursos/nacional/");
-        //linkConcursos.add("https://www.pciconcursos.com.br/concursos/sudeste/");
-        //linkConcursos.add("https://www.pciconcursos.com.br/concursos/sul/");
-        //linkConcursos.add("https://www.pciconcursos.com.br/concursos/norte/");
-        //linkConcursos.add("https://www.pciconcursos.com.br/concursos/nordeste/");
-        //linkConcursos.add("https://www.pciconcursos.com.br/concursos/centrooeste/");
-        //linkConcursos.add("https://www.pciconcursos.com.br/professores/");
+        linkConcursos.add("https://www.pciconcursos.com.br/concursos/sudeste/");
+        linkConcursos.add("https://www.pciconcursos.com.br/concursos/sul/");
+        linkConcursos.add("https://www.pciconcursos.com.br/concursos/norte/");
+        linkConcursos.add("https://www.pciconcursos.com.br/concursos/nordeste/");
+        linkConcursos.add("https://www.pciconcursos.com.br/concursos/centrooeste/");
+        linkConcursos.add("https://www.pciconcursos.com.br/professores/");
 
         for (String link : linkConcursos) {
             concursoService.buscarConcursos(link);
