@@ -86,14 +86,20 @@ public class ConcursoController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Concurso>> buscarPorTituloOuDescricao(@RequestParam String textoBusca) {
+    public ResponseEntity<List<Concurso>> buscarPorTituloOuDescricao(
+        @RequestParam(required = false) String textoBusca,
+        @RequestParam(required = false) String uf) {
         try {
             List<Concurso> concursos = new ArrayList<Concurso>();
 
-            if (textoBusca == null) {
+            if (textoBusca == null & uf == null) {
                 concursoRepository.findAll().forEach(concursos::add);
-            } else {
+            } else if (uf == null) {
                 concursoRepository.buscarPorTituloOuDescricao(textoBusca).forEach(concursos::add);
+            } else if (textoBusca == null) {
+                concursoRepository.buscarPorUF(uf).forEach(concursos::add);
+            } else {
+                concursoRepository.buscarPorTituloDescricaoAndUF(textoBusca, uf).forEach(concursos::add);
             }
 
             if (concursos.isEmpty()){
