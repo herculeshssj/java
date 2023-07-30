@@ -26,14 +26,14 @@ public interface ConcursoRepository extends JpaRepository<Concurso, Long> {
         @Param("uf") String uf
     );
 
-    @Query("SELECT c FROM Concurso c WHERE UPPER(c.titulo) LIKE CONCAT('%',UPPER(:textoBusca), '%') ORDER BY dataTerminoInscricao ASC")
+    @Query("SELECT c FROM Concurso c WHERE UPPER(c.titulo) LIKE CONCAT('%',UPPER(:textoBusca), '%') ORDER BY periodoInscricao ASC")
     List<Concurso> buscarPorTituloOuDescricao(
         @Param("textoBusca") String textoBusca);
 
     @Query("SELECT DISTINCT c.uf FROM Concurso c ORDER BY 1 ASC")
     List<String> buscarUFs();
 
-    @Query("SELECT c FROM Concurso c WHERE c.uf = :uf AND (UPPER(c.titulo) LIKE CONCAT('%',UPPER(:textoBusca),'%') OR UPPER(c.descricao) LIKE CONCAT('%',UPPER(:textoBusca),'%')) ORDER BY dataTerminoInscricao ASC")
+    @Query("SELECT c FROM Concurso c WHERE c.uf = :uf AND (UPPER(c.titulo) LIKE CONCAT('%',UPPER(:textoBusca),'%') OR UPPER(c.descricao) LIKE CONCAT('%',UPPER(:textoBusca),'%')) ORDER BY periodoInscricao ASC")
     List<Concurso> buscarPorTituloDescricaoAndUF(
         @Param("textoBusca") String textoBusca,
         @Param("uf") String uf
