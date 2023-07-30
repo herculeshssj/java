@@ -30,6 +30,6 @@ public interface ConcursoRepository extends JpaRepository<Concurso, Long> {
     List<Concurso> buscarPorTituloOuDescricao(
         @Param("textoBusca") String textoBusca);
 
-    @Query("SELECT DISTINCT c.uf FROM Concurso c")
+    @Query("SELECT DISTINCT c.uf FROM Concurso c ORDER BY 1 ASC")
     List<String> buscarUFs();
 }
