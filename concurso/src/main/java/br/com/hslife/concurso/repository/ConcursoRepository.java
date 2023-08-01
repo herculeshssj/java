@@ -21,7 +21,10 @@ public interface ConcursoRepository extends JpaRepository<Concurso, Long> {
     List<Concurso> buscarNaoArquivadosPorData(
         @Param("dataCorte") LocalDateTime dataCorte);
 
-    @Query("SELECT c FROM Concurso c WHERE c.uf = :uf")
+    @Query("SELECT c FROM Concurso c WHERE c.arquivado = false")
+    List<Concurso> buscarTodosNaoArquivados();
+
+    @Query("SELECT c FROM Concurso c WHERE c.uf = :uf AND c.arquivado = false")
     List<Concurso> buscarPorUF(
         @Param("uf") String uf
     );

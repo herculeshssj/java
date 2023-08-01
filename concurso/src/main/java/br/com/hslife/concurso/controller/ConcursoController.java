@@ -31,7 +31,7 @@ public class ConcursoController {
     public ResponseEntity<List<Concurso>> buscarTodosConcursos() {
         try {
             List<Concurso> concursos = new ArrayList<Concurso>();
-            concursoRepository.findAll().forEach(concursos::add);
+            concursoRepository.buscarTodosNaoArquivados().forEach(concursos::add);
 
             if (concursos.isEmpty()){
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -94,7 +94,7 @@ public class ConcursoController {
             List<Concurso> concursos = new ArrayList<Concurso>();
 
             if (textoBusca == null & uf == null) {
-                concursoRepository.findAll().forEach(concursos::add);
+                concursoRepository.buscarTodosNaoArquivados().forEach(concursos::add);
             } else if (uf == null) {
                 concursoRepository.buscarPorTituloOuDescricao(textoBusca).forEach(concursos::add);
             } else if (textoBusca == null) {
