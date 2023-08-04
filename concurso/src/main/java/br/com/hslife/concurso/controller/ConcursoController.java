@@ -91,7 +91,7 @@ public class ConcursoController {
     public ResponseEntity<Long> quantidadeNovosConcursos() {
         try {
 
-            Long novosConcursos = concursoRepository.quantidadeNovosConcursos(LocalDateTime.now().minusHours(1));
+            Long novosConcursos = concursoRepository.quantidadeNovosConcursos(LocalDateTime.now().minusHours(3));
             if (novosConcursos == null) {
                 return new ResponseEntity<Long>(0l, HttpStatus.NO_CONTENT);
             } else {
