@@ -1,5 +1,6 @@
 package br.com.hslife.concurso.controller;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -81,6 +82,22 @@ public class ConcursoController {
             }
 
             return new ResponseEntity<>(ufs, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/novos")
+    public ResponseEntity<Long> quantidadeNovosConcursos() {
+        try {
+
+            Long novosConcursos = concursoRepository.quantidadeNovosConcursos(LocalDateTime.now().minusHours(1));
+            if (novosConcursos == null) {
+                return new ResponseEntity<Long>(0l, HttpStatus.NO_CONTENT);
+            } else {
+                return new ResponseEntity<Long>(novosConcursos, HttpStatus.OK);
+            }
+
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }

@@ -1,5 +1,6 @@
 package br.com.hslife.concurso.repository;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -41,4 +42,7 @@ public interface ConcursoRepository extends JpaRepository<Concurso, Long> {
         @Param("textoBusca") String textoBusca,
         @Param("uf") String uf
     );
+
+    @Query("SELECT COUNT(c.id) FROM Concurso c WHERE c.dataCadastro >= :dataEscolhida AND c.arquivado = false")
+    Long quantidadeNovosConcursos(@Param("dataEscolhida") LocalDateTime dataEscolhida);
 }
