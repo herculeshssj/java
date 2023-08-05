@@ -91,12 +91,30 @@ public class ConcursoController {
     public ResponseEntity<Long> quantidadeNovosConcursos() {
         try {
 
-            Long novosConcursos = concursoRepository.quantidadeNovosConcursos(LocalDateTime.now().minusHours(3));
+            Long novosConcursos = concursoRepository.quantidadeNovosConcursos(LocalDateTime.now().minusDays(1));
             if (novosConcursos == null) {
                 return new ResponseEntity<Long>(0l, HttpStatus.NO_CONTENT);
             } else {
                 return new ResponseEntity<Long>(novosConcursos, HttpStatus.OK);
             }
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/recentes")
+    public ResponseEntity<List<Concurso>> buscarNovosConcursos() {
+        try {
+
+            List<Concurso> concursos = new ArrayList<Concurso>();
+            concursoRepository.buscarNovosConcursos(LocalDateTime.now().minusDays(1)).forEach(concursos::add);
+
+            if (concursos.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+
+            return new ResponseEntity<>(concursos, HttpStatus.OK);
 
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

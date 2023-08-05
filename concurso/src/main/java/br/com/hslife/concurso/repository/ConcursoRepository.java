@@ -45,4 +45,7 @@ public interface ConcursoRepository extends JpaRepository<Concurso, Long> {
 
     @Query("SELECT COUNT(c.id) FROM Concurso c WHERE c.dataCadastro >= :dataEscolhida AND c.arquivado = false")
     Long quantidadeNovosConcursos(@Param("dataEscolhida") LocalDateTime dataEscolhida);
+
+    @Query("SELECT c FROM Concurso c WHERE c.dataCadastro >= :dataEscolhida AND c.arquivado = false")
+    List<Concurso> buscarNovosConcursos(@Param("dataEscolhida") LocalDateTime dataEscolhida);
 }
