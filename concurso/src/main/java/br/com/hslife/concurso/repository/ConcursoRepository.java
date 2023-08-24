@@ -1,6 +1,5 @@
 package br.com.hslife.concurso.repository;
 
-import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.List;
 
