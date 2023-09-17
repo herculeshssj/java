@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.hslife.concurso.entity.Concurso;
+import br.com.hslife.concurso.entity.UF;
 import br.com.hslife.concurso.repository.ConcursoRepository;
 
 @RestController
@@ -72,16 +73,21 @@ public class ConcursoController {
     }
 
     @GetMapping("/uf")
-    public ResponseEntity<List<String>> buscarUFs() {
+    public ResponseEntity<List<UF>> buscarUFs() {
         try {
             List<String> ufs = new ArrayList<String>();
             concursoRepository.buscarUFs().forEach(ufs::add);
+
+            List<UF> ufsEntity = new ArrayList<>();
+            ufs.forEach(item -> {
+                ufsEntity.add(new UF(item, item));
+            });
 
             if (ufs.isEmpty()){
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
 
-            return new ResponseEntity<>(ufs, HttpStatus.OK);
+            return new ResponseEntity<>(ufsEntity, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
