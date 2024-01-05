@@ -1,10 +1,19 @@
 package br.dev.hssj.helloworld.rest;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloWorldController {
+
+    // Inject custom properties
+    @Value("${coach.name}")
+    private String coachName;
+
+    @Value("${team.name}")
+    private String teamName;
+
     // Expose "/" that return "Hello World"
     @GetMapping("/")
     public String sayHello() {
@@ -21,5 +30,10 @@ public class HelloWorldController {
     @GetMapping("/fortune")
     public String getDailyFortune() {
         return "Today is your lucky day!";
+    }
+
+    @GetMapping("/teaminfo")
+    public String getTeamInfo() {
+        return "Coach: " + this.coachName + "; Team: " + this.teamName;
     }
 }
