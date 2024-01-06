@@ -1,4 +1,4 @@
-package br.dev.hssj.springcoredemo;
+package br.dev.hssj.springcoredemo.common;
 
 import org.springframework.stereotype.Component;
 

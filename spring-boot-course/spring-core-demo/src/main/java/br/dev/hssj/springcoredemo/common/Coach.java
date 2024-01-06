@@ -1,4 +1,4 @@
-package br.dev.hssj.springcoredemo;
+package br.dev.hssj.springcoredemo.common;
 
 public interface Coach {
     String getDailyWorkout();
