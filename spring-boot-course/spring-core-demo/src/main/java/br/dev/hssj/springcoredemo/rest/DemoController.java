@@ -20,21 +20,23 @@ public class DemoController {
         System.out.println("In construction: " + getClass().getSimpleName());
     }
 
-    /*
+
     // dependency injection by constructor
     @Autowired
-    public DemoController(Coach theCoach) {
+    public DemoController(@Qualifier("aquatic") Coach theCoach) {
         this.myCoach = theCoach;
     }
-    */
 
+
+    /*
     // dependency injection by setter method
     @Autowired
-    public void setMyCoach(@Qualifier("cricketCoach") Coach theCoach) {
+    public void setMyCoach(@Qualifier("tennisCoach") Coach theCoach) {
         // The primary implementation of Coach interface is TrackCoach.
         // This default setting is possible through @Primary annotation
         this.myCoach = theCoach;
     }
+     */
 
     public void setAnotherCoach(@Qualifier("cricketCoach") Coach anotherCoach) {
         this.anotherCoach = anotherCoach;

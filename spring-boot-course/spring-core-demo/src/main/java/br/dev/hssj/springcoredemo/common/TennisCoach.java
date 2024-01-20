@@ -4,8 +4,8 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 @Component
-@Lazy
-public class TennisCoach implements Coach {
+//@Lazy
+public class TennisCoach extends AbstractCoach implements Coach {
 
     public TennisCoach() {
         System.out.println("In construction: " + getClass().getSimpleName());
