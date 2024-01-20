@@ -14,6 +14,7 @@ public class DemoController {
     private Util util; // this way of injection is not recommended by Spring Team
     // This way make the code harder to unit test
     private Coach myCoach;
+    private Coach anotherCoach;
 
     public DemoController() {
         System.out.println("In construction: " + getClass().getSimpleName());
@@ -29,10 +30,14 @@ public class DemoController {
 
     // dependency injection by setter method
     @Autowired
-    public void setMyCoach(@Qualifier("tennisCoach") Coach theCoach) {
+    public void setMyCoach(@Qualifier("cricketCoach") Coach theCoach) {
         // The primary implementation of Coach interface is TrackCoach.
         // This default setting is possible through @Primary annotation
         this.myCoach = theCoach;
+    }
+
+    public void setAnotherCoach(@Qualifier("cricketCoach") Coach anotherCoach) {
+        this.anotherCoach = anotherCoach;
     }
 
     @GetMapping("/dailyworkout")
@@ -43,5 +48,10 @@ public class DemoController {
     @GetMapping("/today")
     public String getToday() {
         return util.today();
+    }
+
+    @GetMapping("/check")
+    public String check() {
+        return "Comparing beans: myCoach == anotherCoach, " + (myCoach == anotherCoach);
     }
 }
