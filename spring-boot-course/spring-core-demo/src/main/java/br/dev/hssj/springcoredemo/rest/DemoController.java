@@ -15,6 +15,10 @@ public class DemoController {
     // This way make the code harder to unit test
     private Coach myCoach;
 
+    public DemoController() {
+        System.out.println("In construction: " + getClass().getSimpleName());
+    }
+
     /*
     // dependency injection by constructor
     @Autowired
