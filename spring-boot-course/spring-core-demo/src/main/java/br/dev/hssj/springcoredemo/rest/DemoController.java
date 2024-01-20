@@ -26,6 +26,8 @@ public class DemoController {
     // dependency injection by setter method
     @Autowired
     public void setMyCoach(@Qualifier("tennisCoach") Coach theCoach) {
+        // The primary implementation of Coach interface is TrackCoach.
+        // This default setting is possible through @Primary annotation
         this.myCoach = theCoach;
     }
 
