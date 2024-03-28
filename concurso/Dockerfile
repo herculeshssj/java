@@ -1,4 +1,4 @@
-FROM tomcat:10
+FROM tomcat:10-jdk17
 
 RUN apt update && apt install -y maven
 
